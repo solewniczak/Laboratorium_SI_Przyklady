@@ -5,6 +5,9 @@ prowadzonego na wydziale Elekgroniki Telekomunikacji i Informatyki Politechniki 
 
 W celu uruchomienia przykładów, należy przygotować odpowiednie środowisko [conda](https://www.anaconda.com/products/individual).
 Defjincja środowiska znajduje się w pliku `enviroment.yml`.
-W celu utworzenia środowiska `si2021` z pliku należy wykonać polecenie:
+W celu utworzenia środowiska należy wykonać polecenie:
 
     conda env create -f environment.yml
+
+Powyższa komenda utworzy nowe środowisko o nazwie `si2021` oraz zainstaluje wszystkie zależności wymagane do
+wykonania zadań laboratoryjnych.
