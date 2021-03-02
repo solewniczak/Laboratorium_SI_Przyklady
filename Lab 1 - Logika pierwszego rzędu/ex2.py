@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from pyswip import Prolog
 from helper import py2pl
 
