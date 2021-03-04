@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from pyswip import Prolog
 
 prolog = Prolog()
