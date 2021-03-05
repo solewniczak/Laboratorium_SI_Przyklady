@@ -4,43 +4,36 @@ from skfuzzy import control as ctrl
 import matplotlib.pyplot as plt
 
 # Obserwacje
-quality = ctrl.Antecedent(np.arange(0, 11, 1), 'quality')
-service = ctrl.Antecedent(np.arange(0, 11, 1), 'service')
+dystans = ctrl.Antecedent(np.arange(0, 100, 1), 'dystans')
 
 # Akcje
-tip = ctrl.Consequent(np.arange(0, 26, 1), 'tip')
+hamowanie = ctrl.Consequent(np.arange(0, 500, 1), 'hamowanie')
 
 # Funkcje przynależności - generowane automatycznie
-quality.automf(3)
-service.automf(3)
+dystans.automf(3, names=['maly', 'sredni', 'duzy'])
+
 # Funkcje przynależności - tworzenie ręczne
-tip['low'] = fuzz.trimf(tip.universe, [0, 0, 13])
-tip['medium'] = fuzz.trimf(tip.universe, [0, 13, 25])
-tip['high'] = fuzz.trimf(tip.universe, [13, 25, 25])
+hamowanie['slabe'] = fuzz.trimf(hamowanie.universe, [0, 0, 250])
+hamowanie['srednie'] = fuzz.trimf(hamowanie.universe, [0, 250, 500])
+hamowanie['silne'] = fuzz.trimf(hamowanie.universe, [250, 500, 500])
 
-# Wyświetlanie funkcji przynależności
-quality.view()
+dystans.view()
 plt.waitforbuttonpress()
-service.view()
-plt.waitforbuttonpress()
-tip.view()
+hamowanie.view()
 plt.waitforbuttonpress()
 
-# Reguły
 rules = []
-rules.append(ctrl.Rule(quality['poor'] | service['poor'], tip['low']))
-rules.append(ctrl.Rule(service['average'], tip['medium']))
-rules.append(ctrl.Rule(service['good'] | quality['good'], tip['high']))
+rules.append(ctrl.Rule(dystans['maly'], hamowanie['silne']))
+rules.append(ctrl.Rule(dystans['sredni'], hamowanie['srednie']))
+rules.append(ctrl.Rule(dystans['duzy'] , hamowanie['slabe']))
 
-# Kompilacja reguł i utworzenie sterownika
-tipping_ctrl = ctrl.ControlSystem(rules)
-tipping = ctrl.ControlSystemSimulation(tipping_ctrl)
+system_ctrl = ctrl.ControlSystem(rules)
+system = ctrl.ControlSystemSimulation(system_ctrl)
 
-tipping.input['quality'] = float(input("Jakość jedzenia (od 0 do 10): "))
-tipping.input['service'] = float(input("Jakość obsługi (od 0 do 10): "))
+system.input['dystans'] = float(input("Dystans od przeszkody (od 0 do 100): "))
 
 # Wyliczenie wyjścia systemu
-tipping.compute()
-print(tipping.output['tip'])
-tip.view(sim=tipping)
+system.compute()
+print(system.output['hamowanie'], 'N')
+hamowanie.view(sim=system)
 plt.waitforbuttonpress()
