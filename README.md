@@ -23,6 +23,6 @@ W systemie **Windows** niestety nie ma możliwości zainstalowania swi-prolog w 
 Środowisko SWI Prolog należ pobrać osobno ze strony: https://www.swi-prolog.org/download/stable, a następnie zainstalować.
 Następnie możemy utworzyć środowisko conda wraz z wymaganymi zależnościami:
 
-    conda create -n si2021 -c conda-forge python=3.6 gym scikit-learn
+    conda create -n si2021 -c conda-forge python=3.6 gym scikit-learn matplotlib
     conda activate si2021
     pip install py-sudoku pyswip scikit-fuzzy
