@@ -1,3 +1,5 @@
+import time
+
 import numpy as np
 import gym
 
@@ -8,6 +10,7 @@ print(env.observation_space, env.observation_space.low, env.observation_space.hi
 observation = env.reset()
 for t in range(1000):
     env.render()
+    time.sleep(0.01)
     # print(observation)
     position, velocity = observation
     # action = env.action_space.sample() # akcja losowa
