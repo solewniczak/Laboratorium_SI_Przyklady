@@ -31,7 +31,7 @@ def reverse(solution):
     return solution
 
 
-def random_search(coords, method, stopping_iteration=1000):
+def randomized_improvement(coords, method, stopping_iteration=1000):
     nb_coords = len(coords)
 
     best_solution = list(range(nb_coords))
@@ -73,7 +73,6 @@ def simulated_annealing(coords, stopping_iteration=1000, alpha = 0.9985):
         l = np.random.randint(2, T + 1) # lower temperature - smaller changes
         i = np.random.randint(0, nb_coords)
         candidate_solution[i: (i + l)] = reversed(candidate_solution[i: (i + l)])
-
 
         # Accept with probability 1 if candidate is better than current.
         # Accept with probability exp(-∆E/T) if candidate is worse.

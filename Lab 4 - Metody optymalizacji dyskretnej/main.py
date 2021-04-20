@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 from helper import plot_route, plot_improvement, generate_random_coords
-from algorithms import random_search, reverse, transport, permutation, simulated_annealing
+from algorithms import randomized_improvement, reverse, transport, permutation, simulated_annealing
 
 nb_coords = 25
 nb_experiments = 1
@@ -12,9 +12,9 @@ stopping_iteration = 500
 # sum_delta = 0
 for i in range(nb_experiments):
     coords = generate_random_coords(nb_coords)
-    random_solution_permutation, _, permutation_steps = random_search(coords, permutation, stopping_iteration)
-    random_solution_transport, _, transport_steps = random_search(coords, transport, stopping_iteration)
-    random_solution_reverse, _, reverse_steps = random_search(coords, reverse, stopping_iteration)
+    random_solution_permutation, _, permutation_steps = randomized_improvement(coords, permutation, stopping_iteration)
+    random_solution_transport, _, transport_steps = randomized_improvement(coords, transport, stopping_iteration)
+    random_solution_reverse, _, reverse_steps = randomized_improvement(coords, reverse, stopping_iteration)
     annealing_solution, _, annealing_steps = simulated_annealing(coords, stopping_iteration)
 
     # delta = (random_solution_reverse - annealing_solution) / random_solution_reverse
