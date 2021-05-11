@@ -15,7 +15,7 @@ wykonania zadań laboratoryjnych.
 Jeżeli powyższa komenda nie zadziała można też utworzyć środowisko krok po kroku,
 wykonując następujące polecenia:
 
-    conda create -n si2021 -c conda-forge swi-prolog python gym scikit-learn matplotlib
+    conda create -n si2021 -c conda-forge swi-prolog python gym scikit-learn matplotlib nltk
     conda activate si2021
     pip install py-sudoku pyswip scikit-fuzzy
 
@@ -23,6 +23,6 @@ W systemie **Windows** niestety nie ma możliwości zainstalowania swi-prolog w 
 Środowisko SWI Prolog należ pobrać osobno ze strony: https://www.swi-prolog.org/download/stable, a następnie zainstalować.
 Następnie możemy utworzyć środowisko conda wraz z wymaganymi zależnościami:
 
-    conda create -n si2021 -c conda-forge python=3.6 gym scikit-learn matplotlib
+    conda create -n si2021 -c conda-forge python=3.6 gym scikit-learn matplotlib nltk
     conda activate si2021
     pip install py-sudoku pyswip scikit-fuzzy
