@@ -1,6 +1,5 @@
 import random
 import math
-import os
 import time
 from collections import deque
 
