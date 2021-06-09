@@ -89,13 +89,15 @@ for epizode in range(train_epizodes):
             batch_reward = torch.as_tensor(batch_reward, dtype=torch.float)
 
             # current Q values are estimated by NN for all actions
-            current_q_values = dqn(batch_state).gather(1, batch_action.unsqueeze(1)).squeeze()
+            current_q_values = dqn(batch_state)
+            current_action_q_values = current_q_values.gather(1, batch_action.unsqueeze(1)).squeeze()
             # expected Q values are estimated from actions which gives maximum Q value
-            max_next_q_values, _ = dqn(batch_next_state).detach().max(1)
+            next_q_values = dqn(batch_next_state)
+            max_next_q_values, _ = next_q_values.detach().max(1)
             expected_q_values = batch_reward + (gamma * max_next_q_values)
 
             # loss is measured from error between current and newly expected Q values
-            loss = loss_func(current_q_values, expected_q_values)
+            loss = loss_func(current_action_q_values, expected_q_values)
 
             # backpropagation of loss to NN
             optimizer.zero_grad()
