@@ -1,5 +1,6 @@
 import numpy as np
 from helper import fitness, plot_improvement
+from genetic import Genetic
 
 
 def permutation(solution):
@@ -74,6 +75,7 @@ def simulated_annealing(coords, stopping_iteration=1000, alpha = 0.9985):
         i = np.random.randint(0, nb_coords)
         candidate_solution[i: (i + l)] = reversed(candidate_solution[i: (i + l)])
 
+
         # Accept with probability 1 if candidate is better than current.
         # Accept with probability exp(-∆E/T) if candidate is worse.
         candidate_fitness = fitness(coords, candidate_solution)
@@ -89,5 +91,20 @@ def simulated_annealing(coords, stopping_iteration=1000, alpha = 0.9985):
         T *= alpha
         iteration += 1
         steps.append(best_solution)
+
+    return best_fitness, best_solution, steps
+
+
+def genetic(coords, generations=500, population_size=100, elite_size=10, mutation_rate=0.01):
+    genetic = Genetic(coords, population_size=population_size, elite_size=elite_size, mutation_rate=mutation_rate)
+
+    population = genetic.initial_population()
+    steps = []
+    for i in range(generations):
+        population = genetic.next_generation(population)
+        best_solution = genetic.best_solution(population)
+        steps.append(best_solution)
+
+    best_fitness = fitness(coords, best_solution)
 
     return best_fitness, best_solution, steps

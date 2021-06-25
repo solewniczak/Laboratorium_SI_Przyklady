@@ -27,7 +27,6 @@ def plot_improvement(coords, *curves, labels=[]):
     plt.ylabel('Distance')
     plt.xlabel('Iteration step')
 
-
 def load_coords_from_file(file):
     coords = []
     for line in open(file):
